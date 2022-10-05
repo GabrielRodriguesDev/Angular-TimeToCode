@@ -1,0 +1,13 @@
+<div class="class">
+  <h1>Animais:</h1>
+  <ul>
+    <li *ngFor="let animal of animals">
+      Nome: {{ animal.name }} - Tipo: {{ animal.type }}
+
+      <button (click)="showDetails(animal)">Detalhes</button>
+    </li>
+  </ul>
+  <h4 *ngIf="detailsOfAnimal != null && detailsOfAnimal != ''">
+    {{ detailsOfAnimal }}
+  </h4>
+</div>

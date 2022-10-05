@@ -1,0 +1,9 @@
+<div class="class">
+  <p><b>for-render component</b></p>
+  <h4>Lista de números</h4>
+  <div style="display: flex">
+    <p *ngFor="let number of numbers">{{ number }} -</p>
+  </div>
+
+  <app-emitter (changeNumberAgain)="onChangeNumberAgain($event)"></app-emitter>
+</div>

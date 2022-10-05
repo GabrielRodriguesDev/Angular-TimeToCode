@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import * as signalR from '@microsoft/signalr';
+import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
 
 @Component({
@@ -19,7 +20,6 @@ export class AppComponent implements OnInit {
   }
 
 
-
   private _hubConnection?: HubConnection;
 
   constructor() {
@@ -27,20 +27,20 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this._hubConnection = new HubConnectionBuilder()
-    //   .withUrl('https://localhost:7144/notify')
-    //   //.configureLogging(LogLevel.Information)
-    //   .build();
+    this._hubConnection = new HubConnectionBuilder()
+      .withUrl('https://finansist.trdev.com.br/notify'
+      )
 
-    // this._hubConnection
-    //   .start()
-    //   .then(() => console.log('Connection started!'))
-    //   .catch(err => console.log('Error while establishing connection :('));
+      .configureLogging(LogLevel.Information)
+      .build();
 
-    // this._hubConnection.on('SendNotification', (data: Gabriel) => {
-    //   this.eu = data;
-    //   this.eus?.push(data);
-    //   console.log(this.eus);
-    // });
+    this._hubConnection
+      .start()
+      .then(() => console.log('Conexão iniciada!'))
+      .catch(err => console.log('Erro enquanto estabelecia a conexão :('));
+
+    this._hubConnection.on('SendNotification', (data: Object) => {
+      console.log(data);
+    });
   }
 }
